@@ -1,16 +1,18 @@
 <html>
     <head>
-        <title>Django blog</title>
+        <title>mvasz</title>
     </head>
     <body>
-      {% for p in pubs %}
-        <div>
-          <p>publicado: {{p.fecha_publicacion}}</p>
-          <h1>
-            <a href="">{{p.titulo}}</a>
-          </h1>
-          <p>{{p.texto}}</p>
-        </div>
-      {% endfor %}
+      <div>
+        <h1>
+          <a href="/">Django Blog</a>
+        </h1>
+      </div>{% for i in pubs %}<div>
+        <p>publicado: {{i.fecha_publicacion}}</p>
+        <h1>
+          <a href="">{{i.titulo}}</a>
+        </h1>
+        <p>{{i.texto}}</p>
+      </div>{% endfor %}
     </body>
 </html>
