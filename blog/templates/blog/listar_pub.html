@@ -5,17 +5,15 @@
     <body>
       <div>
         <h1>
-          <a href="/">Django Blog</a>
+          <a href="">Django Blog</a>
         </h1>
-      </div>
+      </div>{% for i in pubs %}
       <div>
-        {% for i in pubs %}
         <p>publicado: {{i.fecha_publicacion}}</p>
         <h1>
           <a href="">{{i.titulo}}</a>
         </h1>
         <p>{{i.texto}}</p>
-        {% endfor %}
-      </div>
+      </div>{% endfor %}
     </body>
 </html>
