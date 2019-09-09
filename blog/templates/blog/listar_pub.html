@@ -1,21 +1,15 @@
-<html>
-    <head>
-        <title>mvasz</title>
-    </head>
-    <body>
-      <div>
-        <h1>
-          <a href="">Django Blog</a>
-        </h1>
-      </div>
-      <div>
-        {% for i in pubs %}
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  {% for i in pubs %}
+    <div class="post">
+      <div class="date">
         <p>publicado: {{i.fecha_publicacion}}</p>
-        <h1>
-          <a href="">{{i.titulo}}</a>
-        </h1>
-        <p>{{i.texto}}</p>
-        {% endfor %}
       </div>
-    </body>
-</html>
+      <h2>
+        <a href="{% url 'detalle_pub' pk=i.pk %}">{{i.titulo}}</a>
+      </h2>
+      <p align="justify">{{i.texto|linebreaksbr}}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
