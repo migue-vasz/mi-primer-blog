@@ -1,13 +1,18 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-  <div class="post">
-    <div class="date">
-      <p>publicado: {{pub.fecha_publicacion}}</p>
+    <div class="post">
+      {% if pub.fecha_publicacion %}
+        <div class="date">
+          <p>publicado: {{pub.fecha_publicacion}}</p>
+        </div>
+      {% endif %}
+      <a class="btn btn-default" href="{% url 'editar_pub' pk=pub.pk %}">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </a>
+      <h2>
+        <a>{{pub.titulo}}</a>
+      </h2>
+      <p align="justify">{{pub.texto|linebreaksbr}}</p>
     </div>
-    <h2>
-      <a>{{pub.titulo}}</a>
-    </h2>
-    <p align="justify">{{pub.texto|linebreaksbr}}</p>
-  </div>
 {% endblock %}

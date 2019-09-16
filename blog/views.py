@@ -24,3 +24,17 @@ def nueva_pub(request):
     else:
         form = FormPub()
     return render(request, 'blog/nueva_pub.html', {'formulario': form})
+
+def editar_pub(request, pk):
+    pub = get_object_or_404(Publicacion, pk=pk)
+    if request.method == "POST":
+        form = FormPub(request.POST, instance=pub)
+        if form.is_valid():
+            pub = form.save(commit=False)
+            pub.autor = request.user
+            pub.fecha_publicacion = timezone.now()
+            pub.save()
+            return redirect('detalle_pub', pk=pub.pk)
+    else:
+        form = FormPub(instance=pub)
+    return render(request, 'blog/editar_pub.html', {'formulario': form})
