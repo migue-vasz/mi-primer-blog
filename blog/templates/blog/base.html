@@ -9,7 +9,11 @@
     </head>
     <body>
       <div class="page-header">
-        <a href="{% url 'nueva_pub' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+        {% if user.is_authenticated %}        
+          <a href="{% url 'nueva_pub' %}" class="top-menu">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
+        {% endif %}
         <h1>
           <a href="/">Django Blog</a>
         </h1>
