@@ -18,7 +18,6 @@ def nueva_pub(request):
         if form.is_valid():
             pub = form.save(commit=False)
             pub.autor = request.user
-            pub.fecha_publicacion = timezone.now()
             pub.save()
             return redirect('detalle_pub', pk=pub.pk)
     else:
@@ -32,9 +31,22 @@ def editar_pub(request, pk):
         if form.is_valid():
             pub = form.save(commit=False)
             pub.autor = request.user
-            pub.fecha_publicacion = timezone.now()
             pub.save()
             return redirect('detalle_pub', pk=pub.pk)
     else:
         form = FormPub(instance=pub)
     return render(request, 'blog/editar_pub.html', {'formulario': form})
+
+def listar_bor(request):
+    pubs = Publicacion.objects.filter(fecha_publicacion__isnull=True).order_by('fecha_creacion')
+    return render(request, 'blog/listar_bor.html', {'pubs': pubs})
+
+def publicar_pub(request, pk):
+    pub = get_object_or_404(Publicacion, pk=pk)
+    pub.publicar()
+    return redirect('detalle_pub', pk=pub.pk)
+
+def eliminar_pub(request, pk):
+    pub = get_object_or_404(Publicacion, pk=pk)
+    pub.delete()
+    return redirect('listar_pub')

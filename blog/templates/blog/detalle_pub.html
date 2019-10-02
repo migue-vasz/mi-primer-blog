@@ -1,20 +1,25 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class="post">
-      {% if pub.fecha_publicacion %}
-        <div class="date">
-          <p>publicado: {{pub.fecha_publicacion}}</p>
-        </div>
-      {% endif %}
-      {% if user.is_authenticated %}
-      <a class="btn btn-default" href="{% url 'editar_pub' pk=pub.pk %}">
-        <span class="glyphicon glyphicon-pencil"></span>
-      </a>
-      {% endif %}
-      <h2>
-        <a>{{pub.titulo}}</a>
-      </h2>
-      <p align="justify">{{pub.texto|linebreaksbr}}</p>
-    </div>
+  <div class="post">
+    {% if pub.fecha_publicacion %}
+      <div class="date">
+        <p>publicado: {{pub.fecha_publicacion}}</p>
+      </div>
+    {% else %}
+        <a class="btn btn-default" href="{% url 'publicar_pub' pk=pub.pk %}">Publicar</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <a class="btn btn-default" href="{% url 'editar_pub' pk=pub.pk %}">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </a>
+    <a class="btn btn-default" href="{% url 'eliminar_pub' pk=pub.pk %}">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    {% endif %}
+    <h2>
+      <a>{{pub.titulo}}</a>
+    </h2>
+    <p align="justify">{{pub.texto|linebreaksbr}}</p>
+  </div>
 {% endblock %}
